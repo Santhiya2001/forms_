@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Payment Form Validation</title>
+</head>
+<body>
+  <h1>Payment Form</h1>
+  <form id="paymentForm" onsubmit="validateForm(event)">
+    <label for="cardNumber">Card Number:</label>
+    <input type="text" id="cardNumber" name="cardNumber"><br>
+    <label for="expirationDate">Expiration Date (MM/YY):</label>
+    <input type="text" id="expirationDate" name="expirationDate"><br>
+    <label for="cvv">CVV:</label>
+    <input type="text" id="cvv" name="cvv"><br>
+    <input type="submit" value="Submit">
+  </form>
+
+  <script>
+    function validateForm(event) {
+      event.preventDefault(); // Prevent form submission
+
+      // Get form inputs
+      var cardNumberInput = document.getElementById('cardNumber');
+      var expirationDateInput = document.getElementById('expirationDate');
+      var cvvInput = document.getElementById('cvv');
+
+      // Validate card number
+      if (!validateCardNumber(cardNumberInput.value)) {
+        alert('Invalid card number');
+        return;
+      }
+
+      // Validate expiration date
+      if (!validateExpirationDate(expirationDateInput.value)) {
+        alert('Invalid expiration date');
+        return;
+      }
+
+      // Validate CVV
+      if (!validateCVV(cvvInput.value)) {
+        alert('Invalid CVV');
+        return;
+      }
+
+      // If all validations pass, submit the form
+      document.getElementById('paymentForm').submit();
+    }
+
+    function validateCardNumber(cardNumber) {
+      // Implement card number validation logic here
+      // You can use regular expressions or other techniques
+      return cardNumber.length === 16;
+    }
+
+    function validateExpirationDate(expirationDate) {
+      // Implement expiration date validation logic here
+      // You can use regular expressions or other techniques
+      return /^\d{2}\/\d{2}$/.test(expirationDate);
+    }
+
+    function validateCVV(cvv) {
+      // Implement CVV validation logic here
+      // You can use regular expressions or other techniques
+      return /^\d{3}$/.test(cvv);
+    }
+  </script>
+</body>
+</html>
